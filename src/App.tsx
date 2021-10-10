@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./styles/app.css";
 
 function App() {
+  function create() {}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="page-app">
+      <div className="content">
+        <h1>Login</h1>
+        <form onSubmit={create}>
+          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Email" />
+          <input type="text" placeholder="Password" />
+          <button type="submit"> Login </button>
+        </form>
+      </div>
     </div>
   );
 }
