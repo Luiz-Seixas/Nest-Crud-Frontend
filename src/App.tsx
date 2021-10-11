@@ -1,20 +1,13 @@
 import React from "react";
-import "./styles/app.css";
+import { BrowserRouter } from "react-router-dom";
+
+import Routes from "./routes";
 
 function App() {
-  function create() {}
   return (
-    <div id="page-app">
-      <div className="content">
-        <h1>Login</h1>
-        <form onSubmit={create}>
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Email" />
-          <input type="text" placeholder="Password" />
-          <button type="submit"> Login </button>
-        </form>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
 }
 

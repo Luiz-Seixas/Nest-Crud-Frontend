@@ -1,0 +1,25 @@
+#page_home {
+  height: 100vh;
+
+  background-color: #f1f1f1;
+}
+
+header {
+  padding: 12px;
+
+  display: flex;
+  justify-content: center;
+}
+
+header h1 {
+
+}
+
+header a {
+  position: absolute;
+  right: 12px;
+
+  text-decoration: none;
+
+
+}
