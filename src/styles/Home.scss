@@ -1,0 +1,33 @@
+#page_home {
+  height: 100vh;
+
+  background-color: #a7a7a7;
+
+  header {
+    padding: 12px;
+
+    display: flex;
+    justify-content: center;
+
+    h1{ 
+      font-weight: 400;
+    }
+
+    a {
+      position: absolute;
+      right: 12px;
+
+      text-decoration: none;
+
+    }
+  }
+
+  .content {
+    width: 100%;
+  }
+}
+
+
+
+
+

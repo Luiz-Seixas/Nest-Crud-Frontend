@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useState } from "react";
 import userRepository, { IUser } from "../services/api";
 
-import "../styles/login.css";
+import "../styles/register.scss";
 
-export default function Login_page() {
+export default function Register_page() {
   const [user, setUser] = useState<IUser>({
     name: "",
     email: "",
@@ -39,7 +39,7 @@ export default function Login_page() {
       </div>
       <div className="content">
         <div className="header">
-          <h1> Login </h1>
+          <h1> Cadastro </h1>
         </div>
         <form onSubmit={create}>
           <input
@@ -69,7 +69,7 @@ export default function Login_page() {
               saveUser(e);
             }}
           />
-          <button type="submit"> Login </button>
+          <button type="submit"> Register </button>
         </form>
       </div>
     </div>

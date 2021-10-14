@@ -1,4 +1,4 @@
-import "../styles/Home.css";
+import "../styles/Home.scss";
 
 export default function Home() {
   function create() {}
