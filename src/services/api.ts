@@ -15,12 +15,8 @@ class userRepository {
   }
 
   async getUsers() {
-    try {
-      const response = await this.instance.get("/users");
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
+    const response = await this.instance.get("/users");
+    return response.data;
   }
 
   async createUser(newUser: IUser) {
