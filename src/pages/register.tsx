@@ -7,7 +7,9 @@ export default function Register_page() {
   const [user, setUser] = useState<IUser>({
     name: "",
     email: "",
+    phone: "",
     password: "",
+    _id: "",
   });
 
   function create(e: ChangeEvent<HTMLFormElement>) {
@@ -56,6 +58,15 @@ export default function Register_page() {
             type="text"
             value={user.email}
             placeholder="Email"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              saveUser(e);
+            }}
+          />
+          <input
+            name="phone"
+            type="text"
+            value={user.phone}
+            placeholder="phone"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               saveUser(e);
             }}
