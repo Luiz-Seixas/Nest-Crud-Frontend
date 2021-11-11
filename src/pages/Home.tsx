@@ -23,8 +23,17 @@ export default function Home() {
 
   async function getUsers() {
     try {
-      const res = await userRepository.getUsers();
-      console.log(res);
+      const res: IUsers[] = await userRepository.getUsers();
+      const usersArray = res.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return 0;
+      });
+      console.log(usersArray);
 
       if (res) {
         setUsers(res);
