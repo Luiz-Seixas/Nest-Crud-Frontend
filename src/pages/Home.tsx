@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import userRepository from "../services/api";
 import "../styles/Home.scss";
 
+import Modal from "../components/Modal";
+
 import { BsTrash } from "react-icons/bs";
 import { FiEdit3 } from "react-icons/fi";
+import { IoCreateOutline } from "react-icons/io5";
 
 interface IUsers {
   name: string;
@@ -33,11 +36,12 @@ export default function Home() {
     }
   }
 
-  async function editUser(user_id: string) {}
+  async function editUser(_user_id: string) {}
 
-  function deleteUser(user_id: string): any {
-    // userRepository.deleteUser(user_id);
+  function deleteUser(user_id: string) {
     console.log(user_id);
+    userRepository.deleteUser(user_id);
+    getUsers();
   }
 
   useEffect(() => {
@@ -48,33 +52,39 @@ export default function Home() {
     <div id="page_home">
       <header>
         <h1>Banco de Usuários</h1>
-        <a href="/login"> Login </a>
       </header>
       <div className="content">
         <h1>Users list</h1>
         <div className="content-wrapper">
           <div className="table-titles">
             <span>Name</span>
-            <span>Emal</span>
+            <span>Email</span>
             <span>Phone</span>
             <span>CreatedAt</span>
+
+            <a href="/login" title="Cadastrar">
+              <IoCreateOutline size="28px" />
+            </a>
           </div>
           {users.map((user) => (
-            <div className="users-content">
-              <div className="user-info">
-                <div className="info">{user.name}</div>
-                <div className="info">{user.email}</div>
-                <div className="info">{user.phone}</div>
-                <div className="info">{user.createdAt}</div>
+            <table className="users-content">
+              <tr className="user-info">
+                <td className="info">{user.name}</td>
+                <td className="info">{user.email}</td>
+                <td className="info">{user.phone}</td>
+                <td className="info">{user.createdAt}</td>
 
                 {/* <a href={}>
                   <FiEdit3 size="16px" />
                 </a> */}
-                <button onClick={deleteUser(user._id)}>
+                <button
+                  onClick={() => deleteUser(user._id)}
+                  title="Deletar usuário"
+                >
                   <BsTrash size="16px" />
                 </button>
-              </div>
-            </div>
+              </tr>
+            </table>
           ))}
         </div>
         <button onClick={getUsers}>Refresh</button>

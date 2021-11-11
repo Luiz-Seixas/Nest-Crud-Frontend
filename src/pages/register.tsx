@@ -1,7 +1,15 @@
 import React, { ChangeEvent, useState } from "react";
-import userRepository, { IUser } from "../services/api";
+import { useHistory } from "react-router-dom";
+import userRepository from "../services/api";
 
 import "../styles/register.scss";
+
+interface IUser {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+}
 
 export default function Register_page() {
   const [user, setUser] = useState<IUser>({
@@ -9,15 +17,16 @@ export default function Register_page() {
     email: "",
     phone: "",
     password: "",
-    _id: "",
   });
+
+  const history = useHistory();
 
   function create(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
 
     userRepository.createUser(user);
 
-    return console.log(user);
+    return history.push("./");
     // const newUser = await userRepository.createUser();
   }
 
@@ -36,9 +45,6 @@ export default function Register_page() {
 
   return (
     <div id="page-app">
-      <div className="header">
-        <a href="/">Home</a>
-      </div>
       <div className="content">
         <div className="header">
           <h1> Cadastro </h1>
@@ -80,7 +86,7 @@ export default function Register_page() {
               saveUser(e);
             }}
           />
-          <button type="submit"> Register </button>
+          <button type="submit">Register</button>
         </form>
       </div>
     </div>

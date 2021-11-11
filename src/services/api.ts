@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
 export interface IUser {
-  _id: string;
   name: string;
   email: string;
   phone: string;
@@ -30,10 +29,14 @@ class userRepository {
     }
   }
 
-  async updateUser(newUser: IUser) {
+  async updateUser(user_id: string, newUser: IUser) {
     try {
-      const response = await this.instance.patch(`/users/${newUser._id}`);
-    } catch (err) {}
+      const response = await this.instance.patch(`/users/${user_id}`, newUser);
+
+      return response;
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   async deleteUser(id: string) {
