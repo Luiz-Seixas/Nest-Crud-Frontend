@@ -20,10 +20,13 @@ interface IUsers {
 
 export default function Home() {
   const [users, setUsers] = useState<IUsers[]>([]);
+  const [userId, setUserId] = useState("");
+  const [show, setShow] = useState(false);
 
   async function getUsers() {
     try {
       const res: IUsers[] = await userRepository.getUsers();
+
       const usersArray = res.sort((a, b) => {
         if (a.name > b.name) {
           return 1;
@@ -33,10 +36,12 @@ export default function Home() {
         }
         return 0;
       });
-      console.log(usersArray);
+      console.log("users array", users);
+
+      const reducedArray = usersArray.slice(0, 12);
 
       if (res) {
-        setUsers(res);
+        setUsers(reducedArray);
       } else {
         console.log("Users not found!");
       }
@@ -45,12 +50,25 @@ export default function Home() {
     }
   }
 
-  async function editUser(_user_id: string) {}
+  async function editUser(user_id: string) {
+    console.log(user_id);
+  }
 
   function deleteUser(user_id: string) {
     console.log(user_id);
     userRepository.deleteUser(user_id);
     getUsers();
+  }
+
+  function toggleEditForm(user_id: string) {
+    setShow(!show);
+    setUserId(user_id);
+
+    if (!show && userId) {
+      return console.log("toglle user_id", userId);
+    } else {
+      console.log("show fail");
+    }
   }
 
   useEffect(() => {
@@ -60,14 +78,14 @@ export default function Home() {
   return (
     <div id="page_home">
       <header>
-        <h1>Banco de Usuários</h1>
+        <h1>Users Bank</h1>
       </header>
       <div className="content">
         <h1>Users list</h1>
         <div className="content-wrapper">
           <div className="table-titles">
             <span>Name</span>
-            <span>Email</span>
+            <span>E-mail</span>
             <span>Phone</span>
             <span>CreatedAt</span>
 
@@ -83,9 +101,12 @@ export default function Home() {
                 <td className="info">{user.phone}</td>
                 <td className="info">{user.createdAt}</td>
 
-                {/* <a href={}>
+                <button
+                  onClick={() => toggleEditForm(user._id)}
+                  title="Editar usuário"
+                >
                   <FiEdit3 size="16px" />
-                </a> */}
+                </button>
                 <button
                   onClick={() => deleteUser(user._id)}
                   title="Deletar usuário"
@@ -95,6 +116,8 @@ export default function Home() {
               </tr>
             </table>
           ))}
+
+          {show ? <Modal user_id={userId} /> : null}
         </div>
         <button onClick={getUsers}>Refresh</button>
       </div>

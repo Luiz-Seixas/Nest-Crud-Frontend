@@ -1,12 +1,38 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import userRepository from "../services/api";
 
 import "../styles/Modal.scss";
 
-export default function Modal() {
-  function updateUser() {
-    // userRepository.updateUser()
+interface IProps {
+  user_id: string;
+}
+
+export interface IEditUser {
+  name?: string;
+  email?: string;
+  phone?: string;
+  password?: string;
+}
+
+export default function Modal(props: IProps) {
+  const [user, setUser] = useState<IEditUser>({});
+  const initialState = {};
+
+  function saveUser(e: ChangeEvent<HTMLInputElement>) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    console.log(user);
   }
+
+  function updateUser(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log("user", user);
+
+    return userRepository.updateUser(props.user_id, user);
+  }
+
+  useEffect(() => {
+    console.log("modal props", props.user_id);
+  }, []);
 
   return (
     <div className="Content">
@@ -14,30 +40,41 @@ export default function Modal() {
         <input
           name="name"
           type="text"
-          // value={user.name}
+          value={user.name}
           placeholder="Name"
-          // onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          //   saveUser(e);
-          // }}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            saveUser(e);
+          }}
         />
         <input
           name="email"
-          type="text"
-          // value={user.email}
+          type="email"
+          value={user.email}
           placeholder="Email"
-          // onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          //   saveUser(e);
-          // }}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            saveUser(e);
+          }}
         />
         <input
           name="phone"
-          type="text"
-          // value={user.phone}
-          placeholder="phone"
-          // onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          //   saveUser(e);
-          // }}
+          type="tel"
+          value={user.phone}
+          placeholder="Phone"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            saveUser(e);
+          }}
         />
+        <input
+          name="password"
+          type="password"
+          value={user.password}
+          placeholder="Password"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            saveUser(e);
+          }}
+        />
+
+        <button type="submit">Edi</button>
       </form>
     </div>
   );

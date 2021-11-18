@@ -1,11 +1,6 @@
 import axios, { AxiosInstance } from "axios";
-
-export interface IUser {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-}
+import { IUser } from "../pages/register";
+import { IEditUser } from "../components/Modal";
 
 class userRepository {
   protected readonly instance: AxiosInstance;
@@ -29,7 +24,7 @@ class userRepository {
     }
   }
 
-  async updateUser(user_id: string, newUser: IUser) {
+  async updateUser(user_id: string, newUser: IEditUser) {
     try {
       const response = await this.instance.patch(`/users/${user_id}`, newUser);
 

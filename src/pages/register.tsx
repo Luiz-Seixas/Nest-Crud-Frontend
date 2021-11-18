@@ -4,7 +4,7 @@ import userRepository from "../services/api";
 
 import "../styles/register.scss";
 
-interface IUser {
+export interface IUser {
   name: string;
   email: string;
   phone: string;
@@ -27,19 +27,10 @@ export default function Register_page() {
     userRepository.createUser(user);
 
     return history.push("./");
-    // const newUser = await userRepository.createUser();
   }
 
   function saveUser(e: ChangeEvent<HTMLInputElement>) {
-    // const userTest = {
-    //   name: "",
-    //   email: "",
-    //   password: "",
-    // };
-
     setUser({ ...user, [e.target.name]: e.target.value });
-    // const { name, value } = e.target;
-
     console.log(user);
   }
 
@@ -61,25 +52,25 @@ export default function Register_page() {
           />
           <input
             name="email"
-            type="text"
+            type="email"
             value={user.email}
-            placeholder="Email"
+            placeholder="E-mail"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               saveUser(e);
             }}
           />
           <input
             name="phone"
-            type="text"
+            type="tel"
             value={user.phone}
-            placeholder="phone"
+            placeholder="Phone"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               saveUser(e);
             }}
           />
           <input
             name="password"
-            type="text"
+            type="password"
             value={user.password}
             placeholder="Password"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
