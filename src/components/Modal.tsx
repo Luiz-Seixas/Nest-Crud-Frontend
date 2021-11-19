@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import userRepository from "../services/api";
 
-import "../styles/Modal.scss";
+import "../styles/Home.scss";
 
 interface IProps {
   user_id: string;
@@ -27,7 +27,9 @@ export default function Modal(props: IProps) {
     e.preventDefault();
     console.log("user", user);
 
-    return userRepository.updateUser(props.user_id, user);
+    userRepository.updateUser(props.user_id, user);
+
+    return setUser(initialState);
   }
 
   useEffect(() => {
@@ -35,7 +37,8 @@ export default function Modal(props: IProps) {
   }, []);
 
   return (
-    <div className="Content">
+    <div className="Modal-Content">
+      <h1>Edit User</h1>
       <form onSubmit={updateUser}>
         <input
           name="name"

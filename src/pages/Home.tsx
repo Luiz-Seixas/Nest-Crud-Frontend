@@ -116,12 +116,12 @@ export default function Home() {
               </tr>
             </table>
           ))}
-
-          {show ? <Modal user_id={userId} /> : null}
         </div>
+
+        {show ? <Modal user_id={userId} /> : null}
+
         <button onClick={getUsers}>Refresh</button>
       </div>
-      <div className="content"></div>
     </div>
   );
 }

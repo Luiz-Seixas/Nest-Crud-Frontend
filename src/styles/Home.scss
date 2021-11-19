@@ -3,6 +3,8 @@
 
   background-color: #e4e4e4;
 
+  position: relative;
+
   header {
     background: #1b1b1f;
     color: #e1e1e6;
@@ -96,7 +98,38 @@
       }
 
     }
+
+    .Modal-Content {
+      height: 50vh;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.623);
+  
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h1 {
+        color: #e1e1e6;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          padding: 8px;
+          margin-bottom: 5px;
+          border-radius: 8px;
+          border: 0;
+        }
+
+      }
+    }
+
   }
+
   button {
     margin-top: 24px;
     border-radius: 8px;
@@ -114,7 +147,6 @@
     background-color: #284fff;
   }
 
-  
 }
 
 
