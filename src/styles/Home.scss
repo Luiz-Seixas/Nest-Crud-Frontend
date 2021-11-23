@@ -30,6 +30,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 80px;
 
 
@@ -117,32 +118,46 @@
     .Modal-Content {
       height: 50vh;
       width: 100%;
+      margin-bottom: 108px;
       background-color: rgba(0, 0, 0, 0.623);
-  
+
       position: absolute;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
 
       header.modal-header {
         width: 100%;
+        padding: 16px;
+
         display: flex;
-        justify-content: center;
         align-items: center;
 
         h1 {
           color: #e1e1e6;
+          margin: 0;
+          left: 45%;
+          position: relative;
         }
 
         button.close-modal {
           background: none;
+          color: #e4e4e4;
+          border: 0.2px solid #e4e4e4;
+
+          right: 0px;
+          margin: 0;
+          margin-right: 40px;
+          position: absolute;
         }
       }
 
       form {
+        margin-top: 30px;
+
         display: flex;
         flex-direction: column;
+
 
         input {
           padding: 8px;

@@ -5,6 +5,7 @@ import "../styles/Home.scss";
 
 interface IProps {
   user_id: string;
+  edit_user(): void;
 }
 
 export interface IEditUser {
@@ -32,6 +33,10 @@ export default function Modal(props: IProps) {
     return setUser(initialState);
   }
 
+  const closeModal = () => {
+    props.edit_user();
+  };
+
   useEffect(() => {
     console.log("modal props", props.user_id);
   }, []);
@@ -40,7 +45,9 @@ export default function Modal(props: IProps) {
     <div className="Modal-Content">
       <header className="modal-header">
         <h1>Edit User</h1>
-        <button className="close-modal">x</button>
+        <button className="close-modal" onClick={closeModal}>
+          x
+        </button>
       </header>
       <form onSubmit={updateUser}>
         <input

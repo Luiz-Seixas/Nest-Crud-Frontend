@@ -1,9 +1,4 @@
-import React, {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import userRepository from "../services/api";
 import "../styles/Home.scss";
 
@@ -29,7 +24,7 @@ export default function Home() {
   const [show, setShow] = useState(false);
 
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const pages = Math.ceil(users.length / itemsPerPage);
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -50,8 +45,6 @@ export default function Home() {
       });
       console.log("users array", users);
 
-      const reducedArray = usersArray.slice(0, 12);
-
       if (res) {
         setUsers(usersArray);
       } else {
@@ -62,8 +55,8 @@ export default function Home() {
     }
   }
 
-  async function editUser() {
-    console.log(userId);
+  function editUser(): void {
+    return setShow(false);
   }
 
   function deleteUser(user_id: string) {
@@ -148,7 +141,7 @@ export default function Home() {
           </div>
         </div>
 
-        {show ? <Modal user_id={userId} /> : null}
+        {show ? <Modal edit_user={editUser} user_id={userId} /> : null}
 
         <button onClick={getUsers}>Refresh</button>
       </div>
