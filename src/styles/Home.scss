@@ -5,7 +5,7 @@
 
   position: relative;
 
-  header {
+  header.page-header {
     background: #1b1b1f;
     color: #e1e1e6;
     padding: 12px;
@@ -97,6 +97,21 @@
 
       }
 
+      .pagination-buttons {
+        display: flex;
+
+        button {
+          background: #1b1b1f;
+          margin: 40px 8px;
+
+          transition: 0.5s;
+
+          &:hover {
+            background: #212122;
+          }
+        }
+      }
+
     }
 
     .Modal-Content {
@@ -110,8 +125,19 @@
       align-items: center;
       justify-content: center;
 
-      h1 {
-        color: #e1e1e6;
+      header.modal-header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+          color: #e1e1e6;
+        }
+
+        button.close-modal {
+          background: none;
+        }
       }
 
       form {

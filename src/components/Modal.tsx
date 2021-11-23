@@ -38,7 +38,10 @@ export default function Modal(props: IProps) {
 
   return (
     <div className="Modal-Content">
-      <h1>Edit User</h1>
+      <header className="modal-header">
+        <h1>Edit User</h1>
+        <button className="close-modal">x</button>
+      </header>
       <form onSubmit={updateUser}>
         <input
           name="name"
@@ -77,7 +80,7 @@ export default function Modal(props: IProps) {
           }}
         />
 
-        <button type="submit">Edi</button>
+        <button type="submit">Edit</button>
       </form>
     </div>
   );

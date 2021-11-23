@@ -1,4 +1,9 @@
-import { useEffect, useState } from "react";
+import React, {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  useEffect,
+  useState,
+} from "react";
 import userRepository from "../services/api";
 import "../styles/Home.scss";
 
@@ -23,6 +28,13 @@ export default function Home() {
   const [userId, setUserId] = useState("");
   const [show, setShow] = useState(false);
 
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pages = Math.ceil(users.length / itemsPerPage);
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = users.slice(startIndex, endIndex);
+
   async function getUsers() {
     try {
       const res: IUsers[] = await userRepository.getUsers();
@@ -41,7 +53,7 @@ export default function Home() {
       const reducedArray = usersArray.slice(0, 12);
 
       if (res) {
-        setUsers(reducedArray);
+        setUsers(usersArray);
       } else {
         console.log("Users not found!");
       }
@@ -50,8 +62,8 @@ export default function Home() {
     }
   }
 
-  async function editUser(user_id: string) {
-    console.log(user_id);
+  async function editUser() {
+    console.log(userId);
   }
 
   function deleteUser(user_id: string) {
@@ -71,13 +83,17 @@ export default function Home() {
     }
   }
 
+  function handleSetPage(index: number) {
+    return setCurrentPage(index);
+  }
+
   useEffect(() => {
     getUsers();
   }, []);
 
   return (
     <div id="page_home">
-      <header>
+      <header className="page-header">
         <h1>Users Bank</h1>
       </header>
       <div className="content">
@@ -93,7 +109,7 @@ export default function Home() {
               <IoCreateOutline size="28px" />
             </a>
           </div>
-          {users.map((user) => (
+          {currentItems.map((user) => (
             <table className="users-content">
               <tr className="user-info">
                 <td className="info">{user.name}</td>
@@ -116,6 +132,20 @@ export default function Home() {
               </tr>
             </table>
           ))}
+
+          <div className="pagination-buttons">
+            {Array.from(Array(pages), (item, index) => {
+              return (
+                <button
+                  onClick={() => {
+                    handleSetPage(index);
+                  }}
+                >
+                  {index + 1}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {show ? <Modal user_id={userId} /> : null}
