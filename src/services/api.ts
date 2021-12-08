@@ -44,4 +44,6 @@ class userRepository {
   }
 }
 
-export default new userRepository("http://localhost:3333/");
+export default new userRepository(
+  "https://nest-crud-backend-app.herokuapp.com/"
+);
